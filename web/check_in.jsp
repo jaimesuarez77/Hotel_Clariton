@@ -112,6 +112,15 @@ if (cnn.getCon() != null) {
 }
         %>
         
+        <input type="submit" name="btnBuscar" value="Tiene Reserva" class="boton">
+        
+         <li>
+                 <input type="text" name="cod_reserva" placeholder="Codigo de la reserva" value="">
+            </li>
+             <li>
+                 <input type="text" name="huesp" placeholder="Cédula del Huesped" value="">
+            </li>
+        
         <input type="submit" name="btnRegistrar" value="Hacer Check-in" class="boton">
         <table>
             <td width="600px">
