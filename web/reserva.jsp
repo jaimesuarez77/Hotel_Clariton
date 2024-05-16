@@ -94,6 +94,55 @@
         
     </form>
   
+     <h2>Reservas Activas</h2>
+     <table class="content-table">
+        <thead>
+            <tr>
+                <th scope="col">Codigo Reserva</th>
+                <th scope="col">Fecha reserva</th>
+                <th scope="col">Fecha de ingreso</th>
+                <th scope="col">Fecha de salida</th>
+                <th scope =col>Cedula Huesped</th>
+                <th scope =col>Cedula Empleado</th>
+                <th scope =col>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% 
+            conectarHotel cnn = new conectarHotel();
+            ResultSet rs = cnn.consultarReserva();
+            if (rs != null) {
+                try {
+                    while (rs.next()) {
+                        int Co_res = rs.getInt("Codigo_reserva");
+                        String res = rs.getString("Fecha_reserva");
+                        String ing = rs.getString("Fecha_ingreso");
+                        String sal = rs.getString("Fecha_salida");
+                        String huesp = rs.getString("Id_huesped");
+                        String emp = rs.getString("Id_empleado");
+                        String est = rs.getString("Estado");
+            %>
+                        <tr>
+                            <td><%=Co_res %></td>
+                            <td><%=res%></td>
+                            <td><%=ing %></td>
+                            <td><%=sal %></td>
+                            <td><%=huesp %></td>
+                            <td><%=emp %></td>
+                            <td><%=est %></td>
+                        </tr>
+            <% 
+                    }
+                    rs.close();
+                } catch (SQLException ex) {
+                    out.println(ex.getMessage());
+                } finally {
+                    cnn.desconectar();
+                }
+            }
+            %>
+        </tbody>
+    </table>      
     
     
     
