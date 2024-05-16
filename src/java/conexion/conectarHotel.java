@@ -266,6 +266,17 @@ public class conectarHotel {
     }
     return rs;
 } 
+        public ResultSet consultarReserva() {
+    ResultSet rs = null;
+    try {
+        String SQL = "SELECT * FROM reserva";
+        PreparedStatement ps = con.prepareStatement(SQL);
+        rs = ps.executeQuery();
+    } catch (SQLException ex) {
+        mensaje = ex.getMessage();
+    }
+    return rs;
+} 
     
     //Metodo para desconectar
     public void desconectar(){
