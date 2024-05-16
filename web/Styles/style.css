@@ -1,0 +1,116 @@
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Georgia, 'Times New Roman', Times, serif, sans-serif;
+        color:#555;
+    }
+
+     #menu {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 250px; 
+        background-color: #333; 
+        color: #fff; 
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+
+    #contenido {
+        margin-left: 250px; 
+        padding: 20px;
+    }
+
+    
+    #menu a {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 0;
+    }
+
+    
+    #menu a.active {
+        background-color: #555;
+    }
+    .boton {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #63605C;
+    padding: 10px 20px;
+    border-radius: 10px;     
+    color: black;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    }
+
+.boton:hover {
+    background-color: #898580;
+}
+.content-table{
+    border-collapse: collapse;
+    margin: 35px 0;
+    font-size: 1em;
+    min-width: 1000px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    
+}
+.content-table thead tr {
+    background-color: #63605C;
+    color: #fff;
+    text-align: left;
+    font-weight: bold;
+}
+.content-table th, content-table td{
+    padding: 15px 25px;
+    font-size: 15px;
+}
+.content-table tbody tr{
+    border-bottom: 1px solid #dddddd;
+    margin-bottom: 40px;
+}
+.content-table tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
+}
+.content-table tbody tr:last-of-type{
+    border-bottom: 2px solid #63605C;
+}
+.content-table tbody tr.active-row{
+    font-weight: bold;
+    color: #63605C;
+}
+ #contenido input[type="text"], #contenido select {
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Para hacer los bordes redondeados */
+    padding: 8px;
+    margin-bottom: 10px;
+    display: block;
+    width: calc(50% - 16px); /* Ajustar el ancho para tener en cuenta el padding */
+    box-sizing: border-box; /* Para incluir el padding en el ancho total */
+}
+#contenido input[type="number"]{
+    
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Para hacer los bordes redondeados */
+    padding: 8px;
+    margin-bottom: 10px;
+    display: block;
+    width: calc(50% - 16px); /* Ajustar el ancho para tener en cuenta el padding */
+    box-sizing: border-box; /* Para incluir el padding en el ancho total */
+    
+    
+    
+}
+
+/* Estilo para eliminar las viñetas de la lista */
+#contenido ul {
+    list-style-type: none;
+    padding: 0;
+}
