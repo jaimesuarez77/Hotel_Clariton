@@ -16,6 +16,54 @@ public class conectarHotel {
     private String cargo;
    //variable par el id del Check-in
     private int id_check;
+    //variables para la reserva
+    private int reserva;
+    private String ingreso;
+    private String salida;
+    private String id_huesped;
+    private String id_usuario;
+
+    public int getReserva() {
+        return reserva;
+    }
+
+    public void setReserva(int reserva) {
+        this.reserva = reserva;
+    }
+
+    public String getIngreso() {
+        return ingreso;
+    }
+
+    public void setIngreso(String ingreso) {
+        this.ingreso = ingreso;
+    }
+
+    public String getSalida() {
+        return salida;
+    }
+
+    public void setSalida(String salida) {
+        this.salida = salida;
+    }
+
+    public String getId_huesped() {
+        return id_huesped;
+    }
+
+    public void setId_huesped(String id_huesped) {
+        this.id_huesped = id_huesped;
+    }
+
+    public String getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(String id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+    
+    
 
     public int getId_check() {
         return id_check;
@@ -215,22 +263,26 @@ public class conectarHotel {
         }
            }
           
-           public void hacerCheck_in(String id_cli, String id_emp, String cod_res, String fechaI, String hora, String equi , String fechaS, int adul, int nin, String est){
+           public void hacerCheck_in(String id_cli,String nom,String ape,int edad,String sexo, String id_emp, String cod_res, String fechaI, String hora, String equi , String fechaS, int adul, int nin, String est){
          
         try{
-            SQL="insert into `check-in` (Id_huesped,Id_empleado,Codigo_reserva,Fecha_ingreso,Hora_ingreso,Equipaje,Fecha_salida,Numero_adultos,Numero_ninos,Estado) values (?,?,?,?,?,?,?,?,?,?)";
+            SQL="insert into `check-in` (Id_huesped,Nombre_huesped,Apellido_huesped,Edad,Sexo,Id_empleado,Codigo_reserva,Fecha_ingreso,Hora_ingreso,Equipaje,Fecha_salida,Numero_adultos,Numero_ninos,Estado) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             //crear sentencia preparada
             PreparedStatement ps=con.prepareStatement(SQL);
             ps.setString(1, id_cli);
-            ps.setString(2, id_emp);
-            ps.setString(3, cod_res);
-            ps.setString(4,fechaI);
-            ps.setString(5,hora);
-            ps.setString(6,equi);
-            ps.setString(7,fechaS);
-            ps.setInt(8,adul);
-            ps.setInt(9,nin);
-            ps.setString(10,est);
+            ps.setString(2, nom);
+            ps.setString(3, ape);
+            ps.setInt(4, edad);
+            ps.setString(5, sexo);
+            ps.setString(6, id_emp);
+            ps.setString(7, cod_res);
+            ps.setString(8,fechaI);
+            ps.setString(9,hora);
+            ps.setString(10,equi);
+            ps.setString(11,fechaS);
+            ps.setInt(12,adul);
+            ps.setInt(13,nin);
+            ps.setString(14,est);
             ps.executeUpdate();
             mensaje="Trasacción exitosa";
             ps.close();
@@ -277,6 +329,33 @@ public class conectarHotel {
     }
     return rs;
 } 
+        
+        public boolean buscarReserva(String id_huesp){
+        boolean encontro=false;  
+        try{
+            SQL="SELECT * from reserva where id_huesped=?";
+            //crear sentencia preparada
+            PreparedStatement ps=con.prepareStatement(SQL);
+            ps.setString(1, id_huesp);
+            //crear un juego de resultados
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+            id_huesped=rs.getString("id_huesped");
+            reserva=rs.getInt("Codigo_reserva");
+            ingreso=rs.getString("fecha_ingreso");
+            salida=rs.getString("fecha_salida");
+            id_usuario=rs.getString("id_empleado");
+            encontro=true;
+            
+            }else{
+            mensaje="No exite la Reserva...";}
+            rs.close();
+            ps.close();
+        }catch(SQLException ex){
+        mensaje=ex.getMessage();
+        }
+        return encontro;
+    }
     
     //Metodo para desconectar
     public void desconectar(){
