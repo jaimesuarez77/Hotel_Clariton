@@ -23,9 +23,9 @@
 <div id="menu">
     <center><img src="images/logo1.png" width="120px"/></center>
     <h2>Hotel Clariton</h2>
-    <a href="index.jsp" class="active">Inicio</a>
+    <a href="index.jsp" >Inicio</a>
     <a href="reserva.jsp">Hacer Reserva</a>
-    <a href="check_in.jsp">Check-in</a>
+    <a href="check_in.jsp" class="active">Check-in</a>
     <a href="check_out.jsp">Check-out</a>
     <a href="huesped.jsp">Crear Huesped</a>
     <a href="habitaciones.jsp">Habitaciones</a>
