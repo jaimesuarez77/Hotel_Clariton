@@ -1,8 +1,4 @@
-<%-- 
-    Document   : index
-    Created on : 9/05/2024, 8:35:33 p. m.
-    Author     : jaime
---%>
+
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.sql.PreparedStatement"%>
@@ -54,10 +50,14 @@
               String hora_ingreso = "";
               String fecha_salida_str = "";
               String txtEqui = "";
+              String id_huesp="";
+              int reserva;
               int txtN_Ad = 0;
               int txtN_Ni = 0;
               String txtEst = "";
               int chec = 0;
+              String id="", nom="",sex="";
+        int edad=0;
               conectarHotel cnn;
           %>
         
@@ -82,11 +82,13 @@ if (cnn.getCon() != null) {
             int txtN_Ad = Integer.parseInt(request.getParameter("txtN_Ad"));
             int txtN_Ni = Integer.parseInt(request.getParameter("txtN_Ni"));
             String txtEst = request.getParameter("txtEst");
-
-         
+            String nombre = request.getParameter("txtNom");
+            String apellido = request.getParameter("txtApe");
+            String sexo = request.getParameter("txtSex");
+            int edad = Integer.parseInt(request.getParameter("txtEdad"));
 
             // Llamar a la función hacerCheck_in con los datos convertidos
-            cnn.hacerCheck_in(txtId_huesp, txtId_usu, txtId_reserva, fecha_ingreso, hora_ingreso, fecha_salida, txtEqui, txtN_Ad, txtN_Ni, "activo");
+            cnn.hacerCheck_in(txtId_huesp,nombre,apellido,edad,sexo, txtId_usu, txtId_reserva, fecha_ingreso, hora_ingreso, fecha_salida, txtEqui, txtN_Ad, txtN_Ni, "activo");
             
             // Imprime el mensaje resultante
             out.println(cnn.getMensaje());
@@ -96,43 +98,65 @@ if (cnn.getCon() != null) {
         }
     }
     
-       if(request.getParameter("btnBuscar")!= null){
-                        if(request.getParameter("btnBuscar").equals("Buscar Check-in")){
-                        cnn.consultarID_Check();
-                        out.println(cnn.getMensaje());
-                        chec=cnn.getId_check();
-                        cnn.desconectar();
-                        
-                    }
-                }
-    
-    
-    
-    
+       if(request.getParameter("btnBuscarR")!= null){
+            if(request.getParameter("btnBuscarR").equals("Buscar Reserva")){
+            String txtId_huesp = request.getParameter("txtId_huesp");
+            cnn.buscarReserva(txtId_huesp);
+            out.println(cnn.getMensaje());
+            id_huesp=cnn.getId_huesped();
+            fecha_ingreso_str=cnn.getIngreso();
+            fecha_salida_str=cnn.getSalida();
+            txtId_usu=cnn.getId_usuario();
+            reserva=cnn.getReserva();
+            cnn.desconectar();            
+            }
+           }
 }
         %>
-        
-        <input type="submit" name="btnBuscar" value="Tiene Reserva" class="boton">
-        
-         <li>
-                 <input type="text" name="cod_reserva" placeholder="Codigo de la reserva" value="">
-            </li>
-             <li>
-                 <input type="text" name="huesp" placeholder="Cédula del Huesped" value="">
-            </li>
-        
-        <input type="submit" name="btnRegistrar" value="Hacer Check-in" class="boton">
         <table>
+            <td>
+             <input type="submit" name="btnBuscarR" value="Buscar Reserva" class="boton">
+              
+            </td>
+             <td>
+              <input type="submit" name="btnRegistrar" value="Hacer Check-in" class="boton">   
+             
+            </td>
+            
+        </table>        
+       
+        <table>
+           
             <td width="600px">
         <ul>
             <li>
-                 <input type="text" name="txtId_huesp" placeholder="Cédula del Huesped" value="">
-            </li>
-            <li>
-                 <input type="text" name="txtId_usu" placeholder="Cédula del Empleado" value="">
+                <label>Cédula Huesped</label>
+                 <input type="text" name="txtId_huesp" placeholder="Cédula del Huesped" value="<%if (cnn!= null){out.println(id_huesp);} %>">
             </li>
              <li>
-                 <input type="text" name="txtId_reserva" placeholder="Codigo de la Reserva" value="">
+                 <label>Nombre del Huesped</label>
+                 <input type="text" name="txtNom" placeholder="Nombre del Huesped" value="">
+            </li>
+             <li>
+                 <label>Apellido del Huesped</label>
+                 <input type="text" name="txtApe" placeholder="Apellido del Huesped" value="">
+            </li>
+             <li>
+                 <label>Edad del Huesped</label>
+                 <input type="text" name="txtEdad" placeholder="Edad del Huesped" value="">
+            </li>
+            <li>
+                <select name="txtSex">
+                    <option value="" selected>-- Sexo --</option>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Femenino">Femenino</option>
+                </select>
+            </li> 
+            <li>
+                 <input type="text" name="txtId_usu" placeholder="Cédula del Empleado" value="<%if (cnn!= null){out.println(txtId_usu);} %>">
+            </li>
+             <li>
+                 <input type="text" name="txtId_reserva" placeholder="Codigo de la Reserva" value="<%if (cnn!= null){out.println(reserva);} %>">
             </li>
           
              <li>
@@ -155,7 +179,7 @@ if (cnn.getCon() != null) {
         <ul>
               <li>
                 <label>Fecha Ingreso</label>
-                 <input type="date" name="fecha_ingreso" >
+                 <input type="text" name="fecha_ingreso" value="<%if (cnn!=null){out.println(fecha_ingreso_str);}%>" >
             </li>
              <li>
                   <label>Hora Ingreso</label>
@@ -163,7 +187,7 @@ if (cnn.getCon() != null) {
             </li>
              <li>
                 <label>Fecha Salida</label>
-                 <input type="date" name="fecha_salida" >
+                 <input type="text" name="fecha_salida" value="<%if (cnn!=null){out.println(fecha_salida_str);}%>" >
             </li>
             
             
