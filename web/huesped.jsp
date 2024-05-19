@@ -83,13 +83,7 @@
                     <option value="Masculino">Masculino</option>
                     <option value="Femenino">Femenino</option>
                 </select>
-            </li>
-
-         
-            
-            
-            
-            
+            </li> 
         </ul>
         
     </form>
