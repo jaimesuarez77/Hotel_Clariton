@@ -33,6 +33,7 @@
     <a href="habitaciones.jsp">Habitaciones</a>
     <a href="servicios.jsp">Servicios</a>
     <a href="empleados.jsp">Empleados</a>
+    <a href="factura.jsp">Factura</a>
 </div>
 
 <div id="contenido">
@@ -64,33 +65,8 @@
             }
         %>
         
-        <input type="submit" name="btnRegistrar" value="Crear Reserva" class="boton">
-        <ul>
-            <li>
-                 <input type="text" name="txtId" placeholder="Cédula del Huesped" value="">
-            </li>
-             <li>
-                 <input type="text" name="txtNom" placeholder="Nombre del Huesped" value="">
-            </li>
-             <li>
-                 <input type="text" name="txtApe" placeholder="Nombre del Usuario" value="">
-            </li>
-             <li>
-                 <input type="text" name="txtEdad" placeholder="Fecha de ingreso" value="">
-            </li>
-               <li>
-                <select name="txtSex">
-                    <option value="" selected> Sexo </option>
-                    <option value="Masculino">Masculino</option>
-                    <option value="Femenino">Femenino</option>
-                </select>
-            </li>
-         
-            
-            
-            
-            
-        </ul>
+  
+
         
     </form>
   
